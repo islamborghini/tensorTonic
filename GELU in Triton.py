@@ -13,7 +13,7 @@ def gelu_kernel(x_ptr, out_ptr, n, BLOCK_SIZE: tl.constexpr):
     # so the overall idea of GELU is : 
     # GELU(x) = x * P(X<=x), where the second term is the cumulative distribution function of normal distribution
     # it is equal to x * Phi(x)
-    tl.store(out_ptr + offsets, 1/2 * x * (1 + tl.erf(x/(2**(1/2)))))
+    tl.store(out_ptr + offsets, 1/2 * x * (1 + tl.erf(x/(2**(1/2)))), mask=mask)
 
 
 
